@@ -1,168 +1,169 @@
-// =============================
-// MOBILE NAVIGATION
-// =============================
+const todoForm = document.getElementById("todoForm");
+const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
+const emptyState = document.getElementById("emptyState");
+const taskCount = document.getElementById("taskCount");
+const completedCount = document.getElementById("completedCount");
+const clearCompleted = document.getElementById("clearCompleted");
+const filterButtons = document.querySelectorAll(".filter");
 
-const menuToggle = document.getElementById("menu-toggle");
-const navMenu = document.getElementById("nav-menu");
-const navLinks = document.querySelectorAll(".nav-link");
+let tasks = JSON.parse(localStorage.getItem("taskflow-tasks")) || [];
+let currentFilter = "all";
 
-menuToggle.addEventListener("click", () => {
-    const isOpen = navMenu.classList.toggle("open");
-
-    menuToggle.setAttribute("aria-expanded", isOpen);
-
-    menuToggle.innerHTML = isOpen
-        ? '<i class="fa-solid fa-xmark"></i>'
-        : '<i class="fa-solid fa-bars"></i>';
-});
-
-
-// Close mobile menu when a navigation link is clicked
-
-navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-
-        menuToggle.innerHTML =
-            '<i class="fa-solid fa-bars"></i>';
-
-        // Update active navigation link
-        navLinks.forEach((item) => {
-            item.classList.remove("active");
-        });
-
-        link.classList.add("active");
+document.getElementById("currentDate").textContent =
+    new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
     });
-});
 
-
-// =============================
-// LIGHT / DARK MODE
-// =============================
-
-const themeToggle = document.getElementById("theme-toggle");
-const themeIcon = themeToggle.querySelector("i");
-
-function applyTheme(theme) {
-    document.body.classList.toggle(
-        "dark-theme",
-        theme === "dark"
-    );
-
-    themeIcon.className = theme === "dark"
-        ? "fa-solid fa-sun"
-        : "fa-solid fa-moon";
-
-    themeToggle.setAttribute(
-        "aria-label",
-        theme === "dark"
-            ? "Switch to light mode"
-            : "Switch to dark mode"
-    );
+function saveTasks() {
+    localStorage.setItem("taskflow-tasks", JSON.stringify(tasks));
 }
 
+function renderTasks() {
+    taskList.innerHTML = "";
 
-// Load saved theme or use system preference
-
-let savedTheme;
-
-try {
-    savedTheme = localStorage.getItem("portfolio-theme");
-} catch (error) {
-    savedTheme = null;
-}
-
-const initialTheme = savedTheme ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
-
-applyTheme(initialTheme);
-
-
-themeToggle.addEventListener("click", () => {
-    const isDark =
-        document.body.classList.contains("dark-theme");
-
-    const newTheme = isDark ? "light" : "dark";
-
-    applyTheme(newTheme);
-
-    try {
-        localStorage.setItem("portfolio-theme", newTheme);
-    } catch (error) {
-        console.warn("Theme preference could not be saved.");
-    }
-});
-
-
-// =============================
-// ACTIVE NAVIGATION ON SCROLL
-// =============================
-
-const sections = document.querySelectorAll("main section[id]");
-
-if ("IntersectionObserver" in window) {
-    const sectionObserver = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const sectionId = entry.target.id;
-
-                    navLinks.forEach((link) => {
-                        const isActive =
-                            link.getAttribute("href") ===
-                            #${sectionId};
-
-                        link.classList.toggle("active", isActive);
-                    });
-                }
-            });
-        },
-        {
-            rootMargin: "-25% 0px -60% 0px"
+    const filteredTasks = tasks.filter(task => {
+        if (currentFilter === "active") {
+            return !task.completed;
         }
-    );
 
-    sections.forEach((section) => {
-        sectionObserver.observe(section);
+        if (currentFilter === "completed") {
+            return task.completed;
+        }
+
+        return true;
     });
+
+    emptyState.style.display =
+        filteredTasks.length === 0 ? "block" : "none";
+
+    filteredTasks.forEach(task => {
+        const taskElement = document.createElement("div");
+
+        taskElement.className = "task";
+        if (task.completed) {
+            taskElement.classList.add("completed");
+        }
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "task-checkbox";
+        checkbox.checked = task.completed;
+        checkbox.setAttribute("aria-label", "Mark task completed");
+
+        const text = document.createElement("span");
+        text.className = "task-text";
+        text.textContent = task.text;
+
+        const actions = document.createElement("div");
+        actions.className = "task-actions";
+
+        const editButton = document.createElement("button");
+        editButton.className = "action-btn edit-btn";
+        editButton.textContent = "Edit";
+        editButton.type = "button";
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "action-btn delete-btn";
+        deleteButton.textContent = "Delete";
+        deleteButton.type = "button";
+
+        actions.append(editButton, deleteButton);
+        taskElement.append(checkbox, text, actions);
+
+        // Event delegation: events are handled by the task list.
+        taskElement.dataset.id = task.id;
+
+        taskList.appendChild(taskElement);
+    });
+
+    const remaining = tasks.filter(task => !task.completed).length;
+    const completed = tasks.filter(task => task.completed).length;
+
+    taskCount.textContent =
+        ${remaining} task${remaining !== 1 ? "s" : ""} remaining;
+
+    completedCount.textContent = ${completed} completed;
+
+    saveTasks();
 }
 
-
-// =============================
-// CONTACT FORM DEMO
-// =============================
-
-const contactForm = document.getElementById("contact-form");
-const formStatus = document.getElementById("form-status");
-
-contactForm.addEventListener("submit", (event) => {
+todoForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
+    const text = taskInput.value.trim();
 
-    if (!name || !email || !message) {
-        formStatus.textContent =
-            "Please complete all fields.";
+    if (!text) return;
 
-        return;
-    }
+    tasks.push({
+        id: Date.now().toString(),
+        text: text,
+        completed: false
+    });
 
-    formStatus.textContent =
-        "Thank you! The form works, but no message was sent because a backend or email service is not connected.";
-
-    contactForm.reset();
+    taskInput.value = "";
+    renderTasks();
+    taskInput.focus();
 });
 
+taskList.addEventListener("click", function (event) {
+    const taskElement = event.target.closest(".task");
 
-// =============================
-// AUTOMATIC FOOTER YEAR
-// =============================
+    if (!taskElement) return;
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+    const taskId = taskElement.dataset.id;
+    const task = tasks.find(item => item.id === taskId);
+
+    if (!task) return;
+
+    if (event.target.classList.contains("delete-btn")) {
+        tasks = tasks.filter(item => item.id !== taskId);
+        renderTasks();
+    }
+
+    if (event.target.classList.contains("edit-btn")) {
+        const updatedText = prompt("Edit your task:", task.text);
+
+        if (updatedText === null) return;
+
+        if (updatedText.trim()) {
+            task.text = updatedText.trim();
+            renderTasks();
+        } else {
+            alert("Task cannot be empty.");
+        }
+    }
+});
+
+taskList.addEventListener("change", function (event) {
+    if (!event.target.classList.contains("task-checkbox")) return;
+
+    const taskElement = event.target.closest(".task");
+    const task = tasks.find(item => item.id === taskElement.dataset.id);
+
+    if (task) {
+        task.completed = event.target.checked;
+        renderTasks();
+    }
+});
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", function () {
+        currentFilter = this.dataset.filter;
+
+        filterButtons.forEach(btn => {
+            btn.classList.toggle("active", btn === this);
+        });
+
+        renderTasks();
+    });
+});
+
+clearCompleted.addEventListener("click", function () {
+    tasks = tasks.filter(task => !task.completed);
+    renderTasks();
+});
+
+renderTasks();
