@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Portfolio | Web Developer</title>
+
+    <meta name="description"
+          content="My personal portfolio showcasing my skills, projects and web development journey.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="header">
+        <nav class="navbar container">
+
+            <a href="#home" class="logo">
+                <i class="fa-solid fa-code"></i>
+                MyPortfolio
+            </a>
+
+            <button class="menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="nav-menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+
+                <li>
+                    <button class="theme-toggle"
+                            id="theme-toggle"
+                            aria-label="Switch color theme">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero section" id="home">
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+                    <p class="eyebrow">WELCOME TO MY PORTFOLIO</p>
+
+                    <h1>
+                        Hi, I'm a
+                        <span class="highlight">Web Developer</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        I create responsive, attractive and user-friendly
+                        websites using modern web technologies.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            View My Work
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="#contact" class="btn btn-outline">
+                            Contact Me
+                        </a>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
+                        <a href="https://www.linkedin.com/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="profile-card">
+                        <div class="profile-icon">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+
+                        <h2>Creative Developer</h2>
+                        <p>Learning • Building • Growing</p>
+
+                        <div class="profile-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">GET TO KNOW ME</p>
+                    <h2>About <span class="highlight">Me</span></h2>
+                    <p>A little introduction about my journey.</p>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+
+                    <div>
+                        <h3>My Web Development Journey</h3>
+
+                        <p>
+                            I am a passionate learner interested in web
+                            development and modern technologies. I enjoy
+                            creating websites, learning new skills and
+                            building practical projects.
+                        </p>
+
+                        <p>
+                            My goal is to improve my technical knowledge
+                            and develop useful, accessible and responsive
+                            web applications.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Skills Section -->
+        <section class="section section-alt" id="skills">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">WHAT I KNOW</p>
+                    <h2>My <span class="highlight">Skills</span></h2>
+                    <p>Technologies I am learning and using.</p>
+                </div>
+
+                <div class="skills-grid">
+
+                    <article class="skill-card">
+                        <i class="fa-brands fa-html5 skill-icon"></i>
+                        <h3>HTML5</h3>
+                        <p>Semantic structure and accessible web pages.</p>
+                    </article>
+
+                    <article class="skill-card">
+                        <i class="fa-brands fa-css3-alt skill-icon"></i>
+                        <h3>CSS3</h3>
+                        <p>Responsive layouts, Grid, Flexbox and animations.</p>
+                    </article>
+
+                    <article class="skill-card">
+                        <i class="fa-brands fa-js skill-icon"></i>
+                        <h3>JavaScript</h3>
+                        <p>Interactive features and dynamic web content.</p>
+                    </article>
+
+                    <article class="skill-card">
+                        <i class="fa-brands fa-github skill-icon"></i>
+                        <h3>GitHub</h3>
+                        <p>Managing and sharing project source code.</p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">MY RECENT WORK</p>
+                    <h2>My <span class="highlight">Projects</span></h2>
+                    <p>Some projects I have built or plan to build.</p>
+                </div>
+
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                        <div class="project-icon">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>Personal Portfolio</h3>
+
+                            <p>
+                                A responsive portfolio website showcasing
+                                my skills, introduction and projects.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+
+                            <a href="#contact" class="project-link">
+                                Learn More
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+
+                    <article class="project-card">
+                        <div class="project-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>To-Do List App</h3>
+
+                            <p>
+                                A task management application with task
+                                creation, editing and completion features.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>JavaScript</span>
+                                <span>Local Storage</span>
+                            </div>
+
+                            <a href="#contact" class="project-link">
+                                Learn More
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+
+                    <article class="project-card">
+                        <div class="project-icon">
+                            <i class="fa-solid fa-cloud-sun"></i>
+                        </div>
+
+                        <div class="project-content">
+                            <h3>Weather Dashboard</h3>
+
+                            <p>
+                                A weather application that can display
+                                current weather using a weather API.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>JavaScript</span>
+                                <span>REST API</span>
+                            </div>
+
+                            <a href="#contact" class="project-link">
+                                Learn More
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section class="section section-alt" id="contact">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">LET'S CONNECT</p>
+                    <h2>Contact <span class="highlight">Me</span></h2>
+                    <p>Have a question or project idea? Send me a message.</p>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text"
+                               id="name"
+                               name="name"
+                               placeholder="Enter your name"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Enter your email"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message"
+                                  name="message"
+                                  rows="5"
+                                  placeholder="Write your message"
+                                  required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Send Message
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+
+                    <p id="form-status" class="form-status" aria-live="polite"></p>
+
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+
+            <a href="#home" class="logo">
+                <i class="fa-solid fa-code"></i>
+                MyPortfolio
+            </a>
+
+            <p>
+                &copy; <span id="year"></span> My Portfolio.
+                Built with HTML, CSS and JavaScript.
+            </p>
+
+            <a href="#home" class="back-to-top" aria-label="Back to top">
+                <i class="fa-solid fa-arrow-up"></i>
+            </a>
+
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
